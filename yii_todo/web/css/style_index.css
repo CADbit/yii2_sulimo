@@ -1,0 +1,9 @@
+/*
+	Prosty styl dla indexu.
+*/
+#md-content{
+	text-align:center;
+}
+#md-content a{
+	width: 250px;
+}
