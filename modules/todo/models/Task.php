@@ -18,6 +18,29 @@ use Yii;
  */
 class Task extends \yii\db\ActiveRecord
 {
+    const TYPES = [
+        'zadanie' => 'zadanie',
+        'spotkanie' => 'spotkanie',
+        'kolacja' => 'kolacja',
+        'szkolenie' => 'szkolenie',
+        'inne' => 'inne'
+    ];
+
+    public static $TIMES = [];
+
+    public function __construct(){
+        parent::__construct();
+
+        // wygeneruj wszystkie możliwe wartości pól
+        // do wyboru czasu
+        for ($i = 8; $i < 21; $i++){
+            for ($j = 0; $j < 46; $j += 15){
+                $s = sprintf('%02d:%02d', $i, $j);
+                self::$TIMES[$s] = $s;
+            }
+        }
+    }
+
     /**
      * {@inheritdoc}
      */

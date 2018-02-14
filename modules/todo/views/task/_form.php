@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
+use app\modules\todo\models\Task;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\todo\models\Task */
@@ -12,17 +14,17 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'type')->dropDownList(Task::TYPES) ?>
 
-    <?= $form->field($model, 'start_date')->textInput() ?>
+    <?= $form->field($model, 'start_date')->widget(DatePicker::className(), ['clientOptions' => ['defaultDate' => '2014-01-01']]) ?>
 
-    <?= $form->field($model, 'end_date')->textInput() ?>
+    <?= $form->field($model, 'end_date')->widget(DatePicker::className(), ['clientOptions' => ['defaultDate' => '2014-01-01']]) ?>
 
-    <?= $form->field($model, 'start_time')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'start_time')->dropDownList(Task::$TIMES) ?>
 
-    <?= $form->field($model, 'end_time')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'end_time')->dropDownList(Task::$TIMES) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->checkbox() ?>
 
