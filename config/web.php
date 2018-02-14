@@ -43,14 +43,18 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => '/todo/task/'
             ],
         ],
-        */
+    ],
+    'modules' => [
+        'todo' => [
+            'class' => 'app\modules\todo\Module',
+        ],
     ],
     'params' => $params,
 ];
