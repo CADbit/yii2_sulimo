@@ -37,8 +37,8 @@ use yii\widgets\ActiveForm;
         <div class="col-lg-4">    
             <?=
             $form->field($model, 'timefrom')->widget(kartik\time\TimePicker::className(), [
+                'name' => 'timefrom',
                 'pluginOptions' => [
-                    'minuteStep' => '15',
                     'showMeridian' => false,
                 ]
                     ]
@@ -47,8 +47,8 @@ use yii\widgets\ActiveForm;
 
             <?=
             $form->field($model, 'timeto')->widget(kartik\time\TimePicker::className(), [
+                'name' => 'timeto',
                 'pluginOptions' => [
-                    'minuteStep' => '15',
                     'showMeridian' => false,
                 ]
                     ]

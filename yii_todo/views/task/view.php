@@ -38,7 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'dateto',
             'timefrom',
             'timeto',
-            'state',
+                ['attribute' => 'state',
+                'value' => $model->state ? "Tak" : "Nie",],
                 [
                 'attribute' => 'idtype',
                 'value' => $model->idtype0->name,

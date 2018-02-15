@@ -18,22 +18,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Dodaj zadanie', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
+                ['class' => 'yii\grid\SerialColumn'],
             //'id',
             'description',
             'datefrom',
-			'timefrom',
+            'timefrom',
             'dateto',
             'timeto',
-            'state',
+                [
+                'label' => 'Zakończone',
+                'attribute' => 'state',
+                'value' => function($data) {
+                    return $data->state ? "Tak" : "Nie";
+                }
+            ],
             // 'idtype',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>
