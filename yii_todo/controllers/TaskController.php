@@ -64,12 +64,14 @@ class TaskController extends Controller
     public function actionCreate()
     {
         $model = new Task();
+        $typeModel = new \app\models\Type();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'types' => $typeModel,
             ]);
         }
     }

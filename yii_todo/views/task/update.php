@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model app\models\Task */
 
 $this->title = 'Modyfikuj zadanie: ';
-$this->params['breadcrumbs'][] = ['label' => 'Tasks', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Zadania', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Aktualizowanie zadania';
 ?>
 <div class="task-update">
 

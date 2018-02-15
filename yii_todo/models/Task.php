@@ -55,7 +55,7 @@ class Task extends \yii\db\ActiveRecord
             'timefrom' => 'Czas od',
             'timeto' => 'Czas do',
             'state' => 'Zakończone',
-            'idtype' => 'Idtype',
+            'idtype' => 'Typ zadania',
         ];
     }
 

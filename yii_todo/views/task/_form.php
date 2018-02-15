@@ -15,6 +15,15 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'datefrom')->textInput() ?>
+    
+    <!-- XXX: MD TEST -->
+    <!-- <?= $form->field($model, 'datefrom')->widget(\yii\jui\DatePicker::className(),[
+        'language' => 'pl-PL',
+        'dateFormat' => 'dd-MM-yyyy'
+    ] 
+            )
+            
+            ?>    -->
 
     <?= $form->field($model, 'dateto')->textInput() ?>
 
@@ -24,10 +33,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'state')->textInput() ?>
 
-    <?= $form->field($model, 'idtype')->textInput() ?>
+    <?php
+        $items = app\models\Type::find()->select(['name'])->indexBy('id')->column();
+    ?>
+    
+    <?= $form->field($model, 'idtype')->dropDownList($items); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Dodaj' : 'Zapisz', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
