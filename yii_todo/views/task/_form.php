@@ -14,29 +14,62 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'datefrom')->textInput() ?>
-    
-    <!-- XXX: MD TEST -->
-    <!-- <?= $form->field($model, 'datefrom')->widget(\yii\jui\DatePicker::className(),[
-        'language' => 'pl-PL',
-        'dateFormat' => 'dd-MM-yyyy'
-    ] 
+    <div class="row">
+        <div class="col-lg-4">
+            <?=
+            $form->field($model, 'datefrom')->widget(\yii\jui\DatePicker::className(), [
+                'language' => 'pl-PL',
+                'dateFormat' => 'yyyy-MM-dd',
+                'options' => ['style' => 'width:250px;', 'class' => 'form-control']
+                    ]
             )
-            
-            ?>    -->
+            ?>    
 
-    <?= $form->field($model, 'dateto')->textInput() ?>
+            <?=
+            $form->field($model, 'dateto')->widget(\yii\jui\DatePicker::className(), [
+                'language' => 'pl-PL',
+                'dateFormat' => 'yyyy-MM-dd',
+                'options' => ['style' => 'width:250px;', 'class' => 'form-control']
+                    ]
+            )
+            ?>
+        </div>
+        <div class="col-lg-4">    
+            <?=
+            $form->field($model, 'timefrom')->widget(kartik\time\TimePicker::className(), [
+                'pluginOptions' => [
+                    'minuteStep' => '15',
+                    'showMeridian' => false,
+                ]
+                    ]
+            )
+            ?>
 
-    <?= $form->field($model, 'timefrom')->textInput() ?>
-
-    <?= $form->field($model, 'timeto')->textInput() ?>
-
-    <?= $form->field($model, 'state')->textInput() ?>
+            <?=
+            $form->field($model, 'timeto')->widget(kartik\time\TimePicker::className(), [
+                'pluginOptions' => [
+                    'minuteStep' => '15',
+                    'showMeridian' => false,
+                ]
+                    ]
+            )
+            ?>
+        </div>
+    </div>
 
     <?php
-        $items = app\models\Type::find()->select(['name'])->indexBy('id')->column();
+    $states = array(
+        '0' => 'Aktywny',
+        '1' => 'Zakończony',
+            )
     ?>
-    
+
+    <?= $form->field($model, 'state')->dropDownList($states) ?>
+
+    <?php
+    $items = app\models\Type::find()->select(['name'])->indexBy('id')->column();
+    ?>
+
     <?= $form->field($model, 'idtype')->dropDownList($items); ?>
 
     <div class="form-group">
