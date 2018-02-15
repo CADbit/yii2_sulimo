@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Task */
@@ -16,16 +17,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Aktualizuj', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Usuń', ['delete', 'id' => $model->id], [
+        <?=
+        Html::a('Usuń', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Czy na pewno usunąć to zadanie?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ])
+        ?>
     </p>
 
-    <?= DetailView::widget([
+    <?=
+    DetailView::widget([
         'model' => $model,
         'attributes' => [
             //'id',
@@ -35,8 +39,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'timefrom',
             'timeto',
             'state',
-            'idtype',
+                [
+                'attribute' => 'idtype',
+                'value' => $model->idtype0->name,
+                'widgetOptions' => [
+                    'data' => ArrayHelper::map(app\models\Type::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
+                ],
+            ]
         ],
-    ]) ?>
+    ])
+    ?>
 
 </div>
