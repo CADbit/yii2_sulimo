@@ -24,7 +24,10 @@ $this->title = 'TODO Lista';
 				<a class="btn btn-default" href="http://localhost/<?php echo Yii::$app->homeUrl; ?>?r=type/index">Typy Zadań &raquo;</a>
 				<br>
 				<br>
-				<a class="btn btn-default" href="http://localhost/<?php echo Yii::$app->homeUrl; ?>?r=week/index">Lista na ten tydzień &raquo;</a>
+				<a class="btn btn-default" href="http://localhost/<?php echo Yii::$app->homeUrl; ?>?r=week/index">Lista Zadań wg dat &raquo;</a>
+				<br>
+				<br>
+				<a class="btn btn-default" href="http://localhost/<?php echo Yii::$app->homeUrl; ?>?r=week/list">Lista Zadań wg dat z AQ &raquo;</a>
             </div>
         </div>
 

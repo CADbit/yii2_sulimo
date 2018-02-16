@@ -14,13 +14,12 @@ use yii\filters\VerbFilter;
 /**
  * WeekController displays tasks for whole week.
  */
- class WeekController extends Controller
-{
-	/**
+class WeekController extends Controller {
+
+    /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -30,18 +29,35 @@ use yii\filters\VerbFilter;
             ],
         ];
     }
-	
-	/**
+
+    /**
      * Lists all Type models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-		$connection = Yii::$app->db;
-		$command = $connection->createCommand('SELECT * FROM yii_todo.task ta join `type` ty on ta.idtype = ty.id order by datefrom,timefrom;');
-		
-		$fulltasks = $command->queryAll();
-		
+    public function actionIndex() {
+        $connection = Yii::$app->db;
+        $command = $connection->createCommand('SELECT * FROM yii_todo.task ta join `type` ty on ta.idtype = ty.id order by datefrom,timefrom;');
+
+        $fulltasks = $command->queryAll();
+
         return $this->render('index', ['tasks' => $fulltasks]);
     }
+
+    public function actionList() {
+        $newquery = new \yii\db\Query();
+        $rows = $newquery
+                ->select([
+                    'Zadanie' => 'description',
+                    'Typ' => 'name',
+                    'Data' => 'datefrom',
+                    'Godzina' => 'timefrom',
+                    'Koniec' => 'timeto',
+                ])
+                ->from('task')
+                ->innerJoin('type t', 'idtype = t.id')
+                ->orderBy('Data,Godzina')
+                ->all();
+        return $this->render('list', ['tasks' => $rows]);
+    }
+
 }

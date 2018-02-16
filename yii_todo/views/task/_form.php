@@ -66,11 +66,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'state')->dropDownList($states) ?>
 
-    <?php
-    $items = app\models\Type::find()->select(['name'])->indexBy('id')->column();
-    ?>
-
-    <?= $form->field($model, 'idtype')->dropDownList($items); ?>
+    <?= $form->field($model, 'idtype')->dropDownList($types); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Dodaj' : 'Zapisz', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

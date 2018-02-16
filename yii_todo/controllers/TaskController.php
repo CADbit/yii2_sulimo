@@ -60,14 +60,14 @@ class TaskController extends Controller {
      */
     public function actionCreate() {
         $model = new Task();
-        $typeModel = new \app\models\Type();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('create', [
                         'model' => $model,
-                        'types' => $typeModel,
+                        'types' => getTypesAsColumn(),
             ]);
         }
     }
@@ -84,10 +84,17 @@ class TaskController extends Controller {
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('update', [
                         'model' => $model,
+                        'types' => getTypesAsColumn(),
             ]);
         }
+    }
+
+    private function getTypesAsColumn() {
+        $typeModel = new \app\models\Type();
+        return $typeModel->find()->select(['name'])->indexBy('id')->column();
     }
 
     /**

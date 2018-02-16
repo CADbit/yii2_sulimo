@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = 'Aktualizowanie zadania';
     <?=
     $this->render('_form', [
         'model' => $model,
+        'types' => $types,
     ])
     ?>
 
