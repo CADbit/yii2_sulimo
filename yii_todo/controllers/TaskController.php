@@ -65,9 +65,11 @@ class TaskController extends Controller {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
+            $typeModel = new \app\models\Type();
+            
             return $this->render('create', [
                         'model' => $model,
-                        'types' => getTypesAsColumn(),
+                        'types' => $typeModel->find()->select(['name'])->indexBy('id')->column(),
             ]);
         }
     }
@@ -85,14 +87,16 @@ class TaskController extends Controller {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
+            $typeModel = new \app\models\Type();
+            
             return $this->render('update', [
                         'model' => $model,
-                        'types' => getTypesAsColumn(),
+                        'types' => $typeModel->find()->select(['name'])->indexBy('id')->column(),
             ]);
         }
     }
 
-    private function getTypesAsColumn() {
+    public function getTypesAsColumn() {
         $typeModel = new \app\models\Type();
         return $typeModel->find()->select(['name'])->indexBy('id')->column();
     }

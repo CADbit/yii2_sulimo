@@ -69,7 +69,7 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionLogin()
+    /*public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -83,25 +83,29 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+     * 
+     */
 
     /**
      * Logout action.
      *
      * @return Response
      */
-    public function actionLogout()
+    /*public function actionLogout()
     {
         Yii::$app->user->logout();
 
         return $this->goHome();
     }
+     * 
+     */
 
     /**
      * Displays contact page.
      *
      * @return Response|string
      */
-    public function actionContact()
+    /*public function actionContact()
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
@@ -113,14 +117,18 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+     * 
+     */
 
     /**
      * Displays about page.
      *
      * @return string
      */
-    public function actionAbout()
+    /*public function actionAbout()
     {
         return $this->render('about');
     }
+     * 
+     */
 }
