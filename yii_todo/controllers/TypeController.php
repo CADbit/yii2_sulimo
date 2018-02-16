@@ -95,12 +95,14 @@ class TypeController extends Controller {
      * @return mixed
      */
     public function actionDelete($id) {
+        $model = $this->findModel($id);
         try {
-            $this->findModel($id)->delete();
-        } catch (\yii\db\IntegrityException $e) {
-            // komunikat
+            $model->delete();
+            return $this->redirect(['index']);
+        } catch (\yii\db\IntegrityException $e) {         
+            $comment = 'Nie można usunąć wpisu';
+            return $this->render('error', ['name' => $model->name, 'comment' => $comment]);
         }
-        return $this->redirect(['index']);
     }
 
     /**
