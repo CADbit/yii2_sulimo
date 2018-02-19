@@ -116,13 +116,14 @@ class TaskController extends Controller
         $tasks = Task::find();
 
         // odrzuć zadania nie znajdujące się w obecnym tygodniu
-        // $currentDayNumber = date('N');
-        // $monday = strtotime(date('Y-m-d')." - $currentDayNumber days");
-        // $sunday = strtotime(date('Y-m-d')." + $currentDayNumber days");
-        // $tasks->where([
-        //     'start_date' => ['between', strtotime('start_date'), $monday, $sunday]
-        // ]);
-        // var_dump($monday, $sunday);
+        $currentDayNumber = date('N');
+        $monday = new \DateTime();
+        $monday->modify("- $currentDayNumber days");
+        $monday->modify('+ 1 days');
+        $sunday = new \DateTime();
+        $sunday->modify(" + 6 days");
+        // FIXME: jak filtrować ze względu na zakres dat?
+        // $tasks->where("start_date >= ".$monday->format('Y-m-d'))->andWhere("end_date < ".$sunday->format('Y-m-d'));
 
         // posortuj względem godziny rozpoczęcia
         $tasks->orderBy('start_time');
