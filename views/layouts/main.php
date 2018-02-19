@@ -11,6 +11,8 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+Yii::$app->name = 'TODO';
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -38,9 +40,9 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Home', 'url' => ['/']],
+            ['label' => 'Lista zadań', 'url' => ['/todo/task']],
+            ['label' => 'Plan tygodnia', 'url' => ['/todo/task/week-view']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

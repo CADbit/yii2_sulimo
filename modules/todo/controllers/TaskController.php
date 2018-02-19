@@ -110,6 +110,29 @@ class TaskController extends Controller
     }
 
     /**
+     * Shows tasks sorted by day of the week.
+     */
+    public function actionWeekView(){
+        $tasks = Task::find();
+
+        // odrzuć zadania nie znajdujące się w obecnym tygodniu
+        // $currentDayNumber = date('N');
+        // $monday = strtotime(date('Y-m-d')." - $currentDayNumber days");
+        // $sunday = strtotime(date('Y-m-d')." + $currentDayNumber days");
+        // $tasks->where([
+        //     'start_date' => ['between', strtotime('start_date'), $monday, $sunday]
+        // ]);
+        // var_dump($monday, $sunday);
+
+        // posortuj względem godziny rozpoczęcia
+        $tasks->orderBy('start_time');
+
+        return $this->render('week-view', [
+            'tasks' => $tasks->all()
+        ]);
+    }
+
+    /**
      * Finds the Task model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

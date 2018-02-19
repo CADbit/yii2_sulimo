@@ -11,14 +11,24 @@ use app\modules\todo\models\Task;
 ?>
 
 <div class="task-form">
-
+    <?php $defaultDate = date('Y-m-d'); ?>
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'type')->dropDownList(Task::TYPES) ?>
 
-    <?= $form->field($model, 'start_date')->widget(DatePicker::className(), ['clientOptions' => ['defaultDate' => '2014-01-01']]) ?>
+    <?= $form->field($model, 'start_date')->widget(DatePicker::className(), [
+            'clientOptions' => [
+                'defaultDate' => $defaultDate
+            ],
+            'dateFormat' => 'yyyy-MM-dd'
+        ]) ?>
 
-    <?= $form->field($model, 'end_date')->widget(DatePicker::className(), ['clientOptions' => ['defaultDate' => '2014-01-01']]) ?>
+    <?= $form->field($model, 'end_date')->widget(DatePicker::className(), [
+            'clientOptions' => [
+                'defaultDate' => $defaultDate
+            ],
+            'dateFormat' => 'yyyy-MM-dd'
+        ]) ?>
 
     <?= $form->field($model, 'start_time')->dropDownList(Task::$TIMES) ?>
 
