@@ -122,8 +122,9 @@ class TaskController extends Controller
         $monday->modify('+ 1 days');
         $sunday = new \DateTime();
         $sunday->modify(" + 6 days");
-        // FIXME: jak filtrować ze względu na zakres dat?
-        // $tasks->where("start_date >= ".$monday->format('Y-m-d'))->andWhere("end_date < ".$sunday->format('Y-m-d'));
+
+        $tasks->where([
+            'between', 'start_date', $monday->format('Y-m-d'), $sunday->format('Y-m-d')]);
 
         // posortuj względem godziny rozpoczęcia
         $tasks->orderBy('start_time');
