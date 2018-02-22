@@ -6,7 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zadania */
 
-$this->title = $model->opis;
+$this->title = substr($model->opis, 0, 10);
+if(strlen($model->opis) > 10){
+    $this->title .= '...';
+}
 $this->params['breadcrumbs'][] = ['label' => 'Zadanie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
