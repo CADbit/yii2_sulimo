@@ -46,14 +46,16 @@ HTML;
     <?= $form->field($model, 'godzinaod')->widget(TimePicker::class,
         [
             'pluginOptions' => [
-                'minuteStep' => 10
+                'minuteStep' => 10,
+                'showMeridian' => false
             ]
         ]
     ) ?>
     <?= $form->field($model, 'godzinado')->widget(TimePicker::class,
         [
             'pluginOptions' => [
-                'minuteStep' => 10
+                'minuteStep' => 10,
+                'showMeridian' => false
             ]
         ]
     ) ?>
