@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zadania */
 
-$this->title = 'Update Zadania: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Zadanias', 'url' => ['index']];
+$this->title = "Aktualizacja zadania: {$model->opis}";
+$this->params['breadcrumbs'][] = ['label' => 'Zadanie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Aktualizacja';
 ?>
 <div class="zadania-update">
 
@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'taskTypes' => $taskTypes,
+        'taskStates' => $taskStates
     ]) ?>
 
 </div>

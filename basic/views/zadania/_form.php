@@ -1,11 +1,23 @@
 <?php
 
+use kartik\date\DatePicker;
+use kartik\time\TimePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Zadania */
 /* @var $form yii\widgets\ActiveForm */
+
+$dateLayout = <<<HTML
+    <span class="input-group-addon">Od dnia</span>
+    {input1}
+    <span class="input-group-addon"></span>
+    <span class="input-group-addon">do dnia</span>
+    {input2}
+HTML;
+
+
 ?>
 
 <div class="zadania-form">
@@ -18,16 +30,36 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'stan')->dropDownList($taskStates) ?>
 
-    <?= $form->field($model, 'dataod')->textInput() ?>
+    <?= DatePicker::widget([
+        'model' => $model,
+        'attribute' => 'dataod',
+        'attribute2' => 'datado',
+        'form' => $form,
+        'type' => DatePicker::TYPE_RANGE,
+        'layout' => $dateLayout,
+        'pluginOptions' => [
+            'format' => 'yyyy-mm-dd',
+            'autoclose' => true,
+        ]
+    ]) ?>
 
-    <?= $form->field($model, 'datado')->textInput() ?>
-
-    <?= $form->field($model, 'godzinaod')->textInput() ?>
-
-    <?= $form->field($model, 'godzinado')->textInput() ?>
+    <?= $form->field($model, 'godzinaod')->widget(TimePicker::class,
+        [
+            'pluginOptions' => [
+                'minuteStep' => 10
+            ]
+        ]
+    ) ?>
+    <?= $form->field($model, 'godzinado')->widget(TimePicker::class,
+        [
+            'pluginOptions' => [
+                'minuteStep' => 10
+            ]
+        ]
+    ) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Zapisz', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

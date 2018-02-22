@@ -53,10 +53,10 @@ class Zadania extends \yii\db\ActiveRecord
             'typ' => 'Typ',
             'opis' => 'Opis',
             'stan' => 'Stan',
-            'dataod' => 'Dataod',
-            'datado' => 'Datado',
-            'godzinaod' => 'Godzinaod',
-            'godzinado' => 'Godzinado',
+            'dataod' => 'Od dnia',
+            'datado' => 'Do dnia',
+            'godzinaod' => 'Od godziny',
+            'godzinado' => 'Do godziny',
         ];
     }
 
@@ -69,7 +69,7 @@ class Zadania extends \yii\db\ActiveRecord
         return $this->hasOne(TypZadania::class, ['id' => 'typ']);
     }
 
-    public function getStanRelation(){
-        return $this->hasOne(TypZadania::class, ['id' => 'stan']);
+    public function getStanrelation(){
+        return $this->hasOne(StanZadania::class, ['id' => 'stan']);
     }
 }

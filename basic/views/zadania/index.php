@@ -35,13 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'opis',
             [
                 'attribute' => 'stan',
-                'value' => 'stanrelation',
+                'value' => 'stanrelation.nazwa',
                 'filter' => ArrayHelper::map(StanZadania::find()->all(), 'id', 'nazwa')
             ],
             'dataod',
-            //'datado',
-            //'godzinaod',
-            //'godzinado',
+            'datado',
+            'godzinaod',
+            'godzinado',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

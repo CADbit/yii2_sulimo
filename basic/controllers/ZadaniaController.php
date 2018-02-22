@@ -93,6 +93,8 @@ class ZadaniaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $taskTypes = ArrayHelper::map(TypZadania::find()->all(), 'id', 'nazwa');
+        $taskStates = ArrayHelper::map(StanZadania::find()->all(), 'id', 'nazwa');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -100,6 +102,8 @@ class ZadaniaController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'taskTypes' => $taskTypes,
+            'taskStates' => $taskStates
         ]);
     }
 
