@@ -40,6 +40,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Zadania', 'url' => ['/zadania/index']],
             ['label' => 'Typy zadań', 'url' => ['/typ-zadania/index']],
+            ['label' => 'Statusy zadań', 'url' => ['/stan-zadania/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
