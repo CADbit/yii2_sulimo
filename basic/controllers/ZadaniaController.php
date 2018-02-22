@@ -39,12 +39,22 @@ class ZadaniaController extends Controller
      */
     public function actionIndex()
     {
+        $month = Yii::$app->request->post('m');
+        $year = Yii::$app->request->post('y');
+        $model = Zadania::find()->all();
+        if($month===null){
+            $month = date('n');
+        }
+        if($year===null){
+            $year = date('Y');
+        }
         $searchModel = new ZadaniaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'month' => $month,
+            'year' => $year,
+            'model' => $model
         ]);
     }
 

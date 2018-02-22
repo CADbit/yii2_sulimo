@@ -5,13 +5,35 @@ use app\models\TypZadania;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ZadaniaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $model \yii\base\Model*/
+/* @var $month int*/
+/* @var $year int*/
 
 $this->title = 'Zadania';
 $this->params['breadcrumbs'][] = $this->title;
+
+$monthPrev = $monthNext = $month;
+$yearPrev = $yearNext = $year;
+if($month-1 == 0){
+    $monthPrev = 12;
+    $yearPrev -= 1;
+}else{
+    $monthPrev -= 1;
+}
+
+if($month+1 == 13){
+    $monthNext = 1;
+    $yearNext += 1;
+}else{
+    $monthNext += 1;
+}
+
+
 ?>
 <div class="zadania-index">
 
@@ -22,28 +44,36 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Dodaj zadanie', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'attribute' => 'typ',
-                'value' => 'typrelation.nazwa',
-                'filter' => ArrayHelper::map(TypZadania::find()->all(), 'id', 'nazwa')
-            ],
-            'opis',
-            [
-                'attribute' => 'stan',
-                'value' => 'stanrelation.nazwa',
-                'filter' => ArrayHelper::map(StanZadania::find()->all(), 'id', 'nazwa')
-            ],
-            'dataod',
-            'datado',
-            'godzinaod',
-            'godzinado',
+    <?php $form = ActiveForm::begin()?>
+    <?=Html::hiddenInput('m', $monthPrev)?>
+    <?=Html::hiddenInput('y', $yearPrev)?>
+    <?=Html::submitButton('Poprzedni miesiąc', ['class' => 'btn btn-success'])?>
+    <?php ActiveForm::end()?>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+    <?php $form = ActiveForm::begin()?>
+    <?=Html::hiddenInput('m', $monthNext)?>
+    <?=Html::hiddenInput('y', $yearNext)?>
+    <?=Html::submitButton('Następny miesiąc', ['class' => 'btn btn-success'])?>
+    <?php ActiveForm::end()?>
+
+    <?=\app\widgets\WeekCalendar::widget([
+        'model' => $model,
+        'month' => $month,
+        'year' => $year,
+        'eventConfig' => [
+            'title' => 'opis',
+            'state' => 'stan',
+            'type' => 'typ',
+            'stateCss' => [
+                '1' => 'active',
+                '2' => 'inactive',
+                '3' => 'returned',
+            ],
+            'descriptionCss' => 'description',
+            'dayFrom' => 'dataod',
+            'dayTo' => 'datado',
+            'timeFrom' => 'godzinaod',
+            'timeTo' => 'godzinado',
+        ]
+    ])?>
 </div>
