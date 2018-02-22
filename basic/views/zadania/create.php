@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zadania */
 
-$this->title = 'Create Zadania';
-$this->params['breadcrumbs'][] = ['label' => 'Zadanias', 'url' => ['index']];
+$this->title = 'Tworzenie zadania';
+$this->params['breadcrumbs'][] = ['label' => 'Zadanie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zadania-create">
@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'taskTypes' => $taskTypes,
+        'taskStates' => $taskStates,
     ]) ?>
 
 </div>

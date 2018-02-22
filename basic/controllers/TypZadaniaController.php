@@ -2,21 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\StanZadania;
-use app\models\TypZadania;
-use Codeception\PHPUnit\ResultPrinter\Report;
 use Yii;
-use app\models\Zadania;
-use app\models\ZadaniaSearch;
-use yii\helpers\ArrayHelper;
+use app\models\TypZadania;
+use app\models\TypZadaniaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ZadaniaController implements the CRUD actions for Zadania model.
+ * TypZadaniaController implements the CRUD actions for TypZadania model.
  */
-class ZadaniaController extends Controller
+class TypZadaniaController extends Controller
 {
     /**
      * @inheritdoc
@@ -34,12 +30,12 @@ class ZadaniaController extends Controller
     }
 
     /**
-     * Lists all Zadania models.
+     * Lists all TypZadania models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ZadaniaSearch();
+        $searchModel = new TypZadaniaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +45,7 @@ class ZadaniaController extends Controller
     }
 
     /**
-     * Displays a single Zadania model.
+     * Displays a single TypZadania model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,15 +58,13 @@ class ZadaniaController extends Controller
     }
 
     /**
-     * Creates a new Zadania model.
+     * Creates a new TypZadania model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Zadania();
-        $taskTypes = ArrayHelper::map(TypZadania::find()->all(), 'id', 'nazwa');
-        $taskStates = ArrayHelper::map(StanZadania::find()->all(), 'id', 'nazwa');
+        $model = new TypZadania();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -78,13 +72,11 @@ class ZadaniaController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'taskTypes' => $taskTypes,
-            'taskStates' => $taskStates
         ]);
     }
 
     /**
-     * Updates an existing Zadania model.
+     * Updates an existing TypZadania model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -104,7 +96,7 @@ class ZadaniaController extends Controller
     }
 
     /**
-     * Deletes an existing Zadania model.
+     * Deletes an existing TypZadania model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -118,15 +110,15 @@ class ZadaniaController extends Controller
     }
 
     /**
-     * Finds the Zadania model based on its primary key value.
+     * Finds the TypZadania model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Zadania the loaded model
+     * @return TypZadania the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Zadania::findOne($id)) !== null) {
+        if (($model = TypZadania::findOne($id)) !== null) {
             return $model;
         }
 

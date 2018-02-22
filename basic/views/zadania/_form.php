@@ -12,11 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'typ')->textInput() ?>
+    <?= $form->field($model, 'typ')->dropDownList($taskTypes) ?>
 
     <?= $form->field($model, 'opis')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'stan')->textInput() ?>
+    <?= $form->field($model, 'stan')->dropDownList($taskStates) ?>
 
     <?= $form->field($model, 'dataod')->textInput() ?>
 

@@ -61,10 +61,15 @@ class Zadania extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return
+     *
      */
-    public function getTyp0()
+    public function getTyprelation()
     {
-        return $this->hasOne(TypZadania::className(), ['id' => 'typ']);
+        return $this->hasOne(TypZadania::class, ['id' => 'typ']);
+    }
+
+    public function getStanRelation(){
+        return $this->hasOne(TypZadania::class, ['id' => 'stan']);
     }
 }

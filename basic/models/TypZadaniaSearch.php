@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Zadania;
+use app\models\TypZadania;
 
 /**
- * ZadaniaSearch represents the model behind the search form of `app\models\Zadania`.
+ * TypZadaniaSearch represents the model behind the search form of `app\models\TypZadania`.
  */
-class ZadaniaSearch extends Zadania
+class TypZadaniaSearch extends TypZadania
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ZadaniaSearch extends Zadania
     public function rules()
     {
         return [
-            [['id', 'typ'], 'integer'],
-            [['opis', 'stan', 'dataod', 'datado', 'godzinaod', 'godzinado'], 'safe'],
+            [['id'], 'integer'],
+            [['nazwa'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ZadaniaSearch extends Zadania
      */
     public function search($params)
     {
-        $query = Zadania::find();
+        $query = TypZadania::find();
 
         // add conditions that should always apply here
 
@@ -60,17 +60,10 @@ class ZadaniaSearch extends Zadania
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'typ' => $this->typ,
-            'dataod' => $this->dataod,
-            'datado' => $this->datado,
-            'godzinaod' => $this->godzinaod,
-            'godzinado' => $this->godzinado,
         ]);
 
-        $query->andFilterWhere(['like', 'opis', $this->opis])
-            ->andFilterWhere(['like', 'stan', $this->stan]);
+        $query->andFilterWhere(['like', 'nazwa', $this->nazwa]);
 
         return $dataProvider;
     }
-
 }

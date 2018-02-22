@@ -1,5 +1,8 @@
 <?php
 
+use app\models\StanZadania;
+use app\models\TypZadania;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -7,7 +10,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ZadaniaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Zadanias';
+$this->title = 'Zadania';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zadania-index">
@@ -16,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Zadania', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Dodaj zadanie', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -24,11 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'typ',
+            [
+                'attribute' => 'typ',
+                'value' => 'typrelation.nazwa',
+                'filter' => ArrayHelper::map(TypZadania::find()->all(), 'id', 'nazwa')
+            ],
             'opis',
-            'stan',
+            [
+                'attribute' => 'stan',
+                'value' => 'stanrelation',
+                'filter' => ArrayHelper::map(StanZadania::find()->all(), 'id', 'nazwa')
+            ],
             'dataod',
             //'datado',
             //'godzinaod',
