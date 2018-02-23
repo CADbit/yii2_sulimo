@@ -1,15 +1,9 @@
 <?php
 
-use app\models\StanZadania;
-use app\models\TypZadania;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ZadaniaSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $model \yii\base\Model */
 /* @var $month int */
 /* @var $year int */
@@ -53,9 +47,6 @@ for($i = $year-2; $i <= $year+2; $i++){
         'eventConfig' => [
             'title' => 'opis',
             'state' => 'stan',
-            'description' => [
-                'Rodzaj' => 'typrelation.nazwa'
-            ],
             'stateCss' => [
                 '1' => 'active',
                 '2' => 'inactive',
@@ -66,6 +57,11 @@ for($i = $year-2; $i <= $year+2; $i++){
             'dayTo' => 'datado',
             'timeFrom' => 'godzinaod',
             'timeTo' => 'godzinado',
+            'detailLink' => [
+                'controller' => 'zadania',
+                'action' => 'view',
+                'idParam' => 'id'
+            ]
         ]
     ]) ?>
 </div>
