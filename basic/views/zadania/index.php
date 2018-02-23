@@ -10,27 +10,24 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ZadaniaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $model \yii\base\Model*/
-/* @var $month int*/
-/* @var $year int*/
+/* @var $model \yii\base\Model */
+/* @var $month int */
+/* @var $year int */
 
 $this->title = 'Zadania';
 $this->params['breadcrumbs'][] = $this->title;
 
-$monthPrev = $monthNext = $month;
-$yearPrev = $yearNext = $year;
-if($month-1 == 0){
-    $monthPrev = 12;
-    $yearPrev -= 1;
-}else{
-    $monthPrev -= 1;
-}
-
-if($month+1 == 13){
-    $monthNext = 1;
-    $yearNext += 1;
-}else{
-    $monthNext += 1;
+$months = [
+    'styczeń', 'luty', 'marzec',
+    'kwiecień', 'maj', 'czerwiec',
+    'lipiec', 'sierpień', 'wrzesień',
+    'październik', 'listopad', 'grudzień'
+];
+$years = [];//2 w przód i 2 w tyl
+array_unshift($months, '');
+unset($months[0]);
+for($i = $year-2; $i <= $year+2; $i++){
+    $years[$i] = $i;
 }
 
 
@@ -44,19 +41,12 @@ if($month+1 == 13){
         <?= Html::a('Dodaj zadanie', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php $form = ActiveForm::begin()?>
-    <?=Html::hiddenInput('m', $monthPrev)?>
-    <?=Html::hiddenInput('y', $yearPrev)?>
-    <?=Html::submitButton('Poprzedni miesiąc', ['class' => 'btn btn-success'])?>
-    <?php ActiveForm::end()?>
+    <?php $form = ActiveForm::begin() ?>
+    <?= Html::dropDownList('m', $month, $months, ['onchange' => 'this.form.submit()'])?>
+    <?= Html::dropDownList('y', $year, $years, ['onchange' => 'this.form.submit()'])?>
+    <?php ActiveForm::end() ?>
 
-    <?php $form = ActiveForm::begin()?>
-    <?=Html::hiddenInput('m', $monthNext)?>
-    <?=Html::hiddenInput('y', $yearNext)?>
-    <?=Html::submitButton('Następny miesiąc', ['class' => 'btn btn-success'])?>
-    <?php ActiveForm::end()?>
-
-    <?=\app\widgets\WeekCalendar::widget([
+    <?= \app\widgets\WeekCalendar::widget([
         'model' => $model,
         'month' => $month,
         'year' => $year,
@@ -77,5 +67,5 @@ if($month+1 == 13){
             'timeFrom' => 'godzinaod',
             'timeTo' => 'godzinado',
         ]
-    ])?>
+    ]) ?>
 </div>
