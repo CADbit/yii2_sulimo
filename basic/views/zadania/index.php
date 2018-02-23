@@ -63,7 +63,9 @@ if($month+1 == 13){
         'eventConfig' => [
             'title' => 'opis',
             'state' => 'stan',
-            'type' => 'typ',
+            'description' => [
+                'Rodzaj' => 'typrelation.nazwa'
+            ],
             'stateCss' => [
                 '1' => 'active',
                 '2' => 'inactive',

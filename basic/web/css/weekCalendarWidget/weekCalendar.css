@@ -14,8 +14,6 @@
     margin-top: 2px;
     margin-bottom: 0;
     padding-left: 2px;
-    transition: width 0.2s, height 0.2s;
-
 }
 .task.inactive{
     text-decoration: line-through;
@@ -24,11 +22,12 @@
     background: #ff556b;
 }
 .task > .description{
-    width: 0;
-    height: 0;
+    transition: max-height 0.3s;
+    transform-origin: top;
+    max-height: 0;
     overflow: hidden;
+    background: #b2d8a6 !important;
 }
 .task:hover > .description{
-    width: inherit;
-    height: inherit;
+    max-height: 400px;
 }

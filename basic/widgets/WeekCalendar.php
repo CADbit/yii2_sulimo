@@ -29,7 +29,6 @@ class WeekCalendar extends Widget {
     public $year;
     /*
      *  'description' => 'opis',
-     *  'type' => 'typ',
      *  'state' => 'stan',
      *  'dayFrom' => 'dataod',
      *  'dayTo' => 'datado',
@@ -70,7 +69,9 @@ class WeekCalendar extends Widget {
 
         $dateObj = DateTime::createFromFormat('!m', $month);
         $render .= Html::tag('h2', $dateObj->format('F').' '.$year);
+
         $this->tasks = $this->mapTasks($month, $year);
+        $this->normalizeDescription();
 
         $tableContent = $this->renderTableHeader();
 
@@ -122,13 +123,14 @@ class WeekCalendar extends Widget {
     private function getCellContent($day, $month, $year) {
         $ret = Html::tag('div', $day, ['class' => 'calendarDay']);
         foreach ($this->tasks[$day] as $task) {
+            $link = Html::a('Szczegóły','index.php?r=zadania%2Fview&id='.$task['id']);
+            $taskInfo = '';
             $taskCssClasses = 'task ';
             $taskCssClasses .= $this->eventConfig['stateCss'][$task[$this->eventConfig['state']]];
-            $taskInfo = 'Rodzaj:'.$task[$this->eventConfig['type']].'<br/>';
             $taskInfo .= 'Data oddania:'.$task[$this->eventConfig['dayTo']].'<br/>';
             $taskInfo .= 'Godzina nadania:'.$task[$this->eventConfig['timeFrom']].'<br/>';
             $taskInfo .= 'Godzina oddania:'.$task[$this->eventConfig['timeTo']].'<br/>';
-            $content = $task[$this->eventConfig['title']];
+            $content = $task[$this->eventConfig['title']].' - '.$link;
             $content .= Html::tag('div', $taskInfo, ['class' => $this->eventConfig['descriptionCss']]);
             $ret .= Html::tag('div', $content, ['class' => $taskCssClasses]);
         }
@@ -206,6 +208,15 @@ class WeekCalendar extends Widget {
             }
         }
         return $map;
+    }
+
+    private function normalizeDescription(){
+        $desc = $this->eventConfig['description'];
+        foreach ($desc as $item){
+            if(strpos($item, '.') !== false){
+                $path = explode('.', $item);
+            }
+        }
     }
 
 }
